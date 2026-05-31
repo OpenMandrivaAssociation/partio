@@ -1,0 +1,4 @@
+# docs package doesnt provides locale versions
+addFilter("E: no-dependency-on locales-doc")
+# swig generated file
+addFilter("E: script-without-shebang /usr/lib64/python3.14/site-packages/partio.py")
