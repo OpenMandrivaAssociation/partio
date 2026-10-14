@@ -11,7 +11,6 @@ License:	BSD-3-Clause-Modification
 Group:		System/Libraries
 URL:		https://github.com/wdas/partio
 Source0:	https://github.com/wdas/partio/archive/v%{version}/%{name}-%{version}.tar.gz
-Source100:	%{name}.rpmlintrc
 
 BuildSystem:	cmake
 BuildOption:	-DCMAKE_PREFIX_PATH="%{_prefix}"
@@ -55,6 +54,7 @@ Development files (Headers etc.) for %{name}.
 
 %package doc
 Summary:	Documentation for %{name}
+Group:		Documentation
 Requires:	%{name} = %{EVRD}
 BuildArch:	noarch
 
@@ -63,6 +63,7 @@ Documentation for %{name}.
 
 %package -n python-%{name}
 Summary:	Python bindings for %{libname}
+Group:		Development/Python
 
 %description -n python-%{name}
 Pyhton bindings for %{libname}
@@ -70,6 +71,13 @@ Pyhton bindings for %{libname}
 %prep -a
 # Fix shebangs
 sed -i 's:^#!/usr/bin/env python:#!%{__python}:' src/tools/*.py
+# Hand-written SWIG helpers still call the Python 2 C API.
+sed -i \
+	-e 's/PyInt_FromLong/PyLong_FromLong/g' \
+	-e 's/PyInt_AsLong/PyLong_AsLong/g' \
+	-e 's/PyInt_Check/PyLong_Check/g' \
+	-e 's/PyString_FromString/PyUnicode_FromString/g' \
+	src/py/partio.i
 
 %install -a
 # We dont want these
