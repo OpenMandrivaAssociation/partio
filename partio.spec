@@ -5,7 +5,7 @@
 
 Name:		partio
 Version:	1.20.0
-Release:	1
+Release:	2
 Summary:	Library for particle IO and manipulation
 License:	BSD-3-Clause-Modification
 Group:		System/Libraries
@@ -24,7 +24,7 @@ BuildRequires:	help2man
 BuildRequires:	pkgconfig(gl)
 BuildRequires:	pkgconfig(glut)
 BuildRequires:	pkgconfig(gtest)
-BuildRequires:	pkgconfig(python)
+BuildRequires:	pkgconfig(python3)
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	swig
 %if %{with tests}
